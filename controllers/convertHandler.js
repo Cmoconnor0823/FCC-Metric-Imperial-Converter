@@ -120,7 +120,6 @@ function ConvertHandler() {
     if(initNum === null || initUnit === null || returnNum === null || returnUnit === null){
       return null;
     }
-  
     return `${initNum} ${initUnit} will convert to ${returnNum} ${returnUnit}`;
   };
   

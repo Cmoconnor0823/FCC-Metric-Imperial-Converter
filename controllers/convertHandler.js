@@ -27,7 +27,6 @@ function ConvertHandler() {
     if(unit === null){
       return null;
     }
-
     const conversion = input.split(unit)[0];
     console.log(conversion);
 
@@ -46,34 +45,18 @@ function ConvertHandler() {
     const regex = /(gal)|(L)|(lbs)|(kg)|(mi)|(km)$/;
     const result = input.match(regex);
 
-
-    //console.log('Input Unit: ', unit)
+    //console.log('Input Unit: ', result)
     return result === null ? null : result[0];
   };
   
   this.getReturnUnit = initUnit => {
-    var result;
-    
-    return result;
+    if(initUnit === null){
+        return null;
+    }
+    return units[initUnit];
   };
-
+  
   this.spellOutUnit = unit => {
-    var result;
-    
-    return result;
-  };
-  
-  this.convert = (initNum, initUnit) => {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
-    var result;
-    
-    return result;
-  };
-  
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
     
     const validUnits = [
       'gal',
@@ -92,8 +75,53 @@ function ConvertHandler() {
       'mi',
       'mile',
       'pound']
-  
+    var result;
+    
     return result;
+  };
+  
+  this.convert = (initNum, initUnit) => {
+    const galToL = 3.78541;
+    const lbsToKg = 0.453592;
+    const miToKm = 1.60934;
+    const LToGal = 1 / galToL;
+    const kgToLbs = 1 / lbsToKg;
+    const kmToMi = 1 / miToKm;
+    if(initNum === null) {
+      return null;
+    }
+    
+    switch(initUnit) {
+      case 'gal': {
+        return initNum * galToL;
+      }
+      case 'L': {
+        return initNum * LToGal;
+      }
+      case 'lbs': {
+        return initNum * lbsToKg;
+      }
+      case 'kg': {
+        return initNum * kgToLbs;
+      }
+      case 'mi': {
+        return initNum * miToKm;
+      }
+      case 'km': {
+        return initNum * kmToMi;
+      }
+      default: {
+        return null;
+      }
+    }
+  };
+  
+  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+    if(initNum === null || initUnit === null || returnNum === null || returnUnit === null){
+      return null;
+    }
+  
+    return `${initNum} ${initUnit} will convert to ${returnNum} ${returnUnit}`;
   };
   
 }

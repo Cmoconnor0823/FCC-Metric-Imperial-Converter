@@ -10,9 +10,12 @@ const validateInput = /([\d.s]+)([A-z]+)/g;
 
 function ConvertHandler() {
   
-  this.getNum = input => {
-    var result;
-    
+  this.getNum = (input) => {
+    let result = validateInput.exec(input)[1];
+    validateInput.lastIndex = 0;
+    console.log('The Result getNum: ', result[0]);
+    console.log('The Result getNum: ', result[1]);
+    console.log('The Result getNum: ', result[2]);
     return result;
   };
   

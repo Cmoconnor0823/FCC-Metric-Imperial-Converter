@@ -6,23 +6,49 @@
 *       
 */
 
-const validateInput = /([\d.s]+)([A-z]+)/g;
+//const validateInput = /([\d.s]+)([A-z]+\s*)/g;
+const units = {
+  lbs: 'kg',
+  kg: 'lbs',
+  mi: 'km',
+  km: 'mi',
+  gal: 'L',
+  L: 'gal',
+  lbs: 'kg',
+}
+
 
 function ConvertHandler() {
   
   this.getNum = (input) => {
-    let result = validateInput.exec(input)[1];
-    validateInput.lastIndex = 0;
-    console.log('The Result getNum: ', result[0]);
-    console.log('The Result getNum: ', result[1]);
-    console.log('The Result getNum: ', result[2]);
-    return result;
+    const unit = this.getUnit(input);
+    console.log(unit);
+
+    if(unit === null){
+      return null;
+    }
+
+    const conversion = input.split(unit)[0];
+    console.log(conversion);
+
+    try {
+      const result = eval(conversion === '' ? 1 : conversion);
+      return result;
+    } catch(e){
+      return null;
+    }
   };
   
   this.getUnit = input => {
-    var result;
-    
-    return result;
+    // Due to the regex set-up above to get the unit all we need is
+    // const unit = validateInput.exec(input)[2];
+    // validateInput.lastIndex = 0;
+    const regex = /(gal)|(L)|(lbs)|(kg)|(mi)|(km)$/;
+    const result = input.match(regex);
+
+
+    //console.log('Input Unit: ', unit)
+    return result === null ? null : result[0];
   };
   
   this.getReturnUnit = initUnit => {
@@ -47,8 +73,26 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+    let result;
     
+    const validUnits = [
+      'gal',
+      'gallon',
+      'g',
+      'kg',
+      'killogram',
+      'kg',
+      'killograme',
+      'killometer',
+      'killometere',
+      'l',
+      'lb',
+      'litre',
+      'liter',
+      'mi',
+      'mile',
+      'pound']
+  
     return result;
   };
   

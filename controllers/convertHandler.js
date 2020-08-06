@@ -39,10 +39,9 @@ function ConvertHandler() {
   };
   
   this.getUnit = input => {
-    // Due to the regex set-up above to get the unit all we need is
-    // const unit = validateInput.exec(input)[2];
-    // validateInput.lastIndex = 0;
-    const regex = /(gal)|(L)|(lbs)|(kg)|(mi)|(km)$/;
+   
+    input.toLowerCase();
+    const regex = /(gal)|(l)|(lbs)|(kg)|(mi)|(km)|(GAL)|(L)|(LBS)|(KG)|(MI)|(KM)$/;
     const result = input.match(regex);
 
     //console.log('Input Unit: ', result)
@@ -92,23 +91,30 @@ function ConvertHandler() {
     }
     
     switch(initUnit) {
+      case 'GAL':
       case 'gal': {
         return initNum * galToL;
       }
-      case 'L': {
+      case 'L':
+      case 'l': {
         return initNum * LToGal;
       }
+      case 'LBS':
       case 'lbs': {
         return initNum * lbsToKg;
       }
-      case 'kg': {
-        return initNum * kgToLbs;
-      }
+      
+      case 'MI':
       case 'mi': {
         return initNum * miToKm;
       }
+      case 'KM':
       case 'km': {
         return initNum * kmToMi;
+      }
+      case 'KG':
+      case 'kg': {
+        return initNum * kgToLbs;
       }
       default: {
         return null;

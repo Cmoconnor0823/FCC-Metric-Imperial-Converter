@@ -9,6 +9,7 @@
 var chai = require('chai');
 var assert = chai.assert;
 var ConvertHandler = require('../controllers/convertHandler.js');
+const { expect } = require('chai');
 
 var convertHandler = new ConvertHandler();
 
@@ -35,18 +36,23 @@ suite('Unit Tests', function(){
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      var input = '6.0/3L';
+      assert.equal(convertHandler.getNum(input),2);
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      var input = '6/3/3';
+     // console.log(assert.equal(convertHandler.getNum(input),null))
+      assert.equal(convertHandler.getNum(input), null);
+      done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      var input = 'mi';
+      // console.log(assert.equal(convertHandler.getNum(input),null))
+       assert.equal(convertHandler.getNum(input), 1);
+       done();
     }); 
     
   });
@@ -54,16 +60,24 @@ suite('Unit Tests', function(){
   suite('Function convertHandler.getUnit(input)', function() {
     
     test('For Each Valid Unit Inputs', function(done) {
+
       var input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
-      input.forEach(function(ele) {
+      var expected = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
+      input.forEach(function(ele, i) {
         //assert
+        console.log(ele)
+        assert.equal(convertHandler.getUnit(ele), expected[i]);
       });
       done();
     });
     
     test('Unknown Unit Input', function(done) {
-      
-      //done();
+      var input = ["20.0", "17.3 pounds", "2/3kilograms"];
+      input.forEach(function(ele) {
+        //assert
+        assert.equal(convertHandler.getUnit(ele), "invalid unit")
+      }); 
+      done();
     });  
     
   });

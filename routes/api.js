@@ -8,7 +8,6 @@
 
 "use strict";
 
-var expect = require("chai").expect;
 var ConvertHandler = require("../controllers/convertHandler.js");
 
 module.exports = function (app) {
@@ -19,7 +18,7 @@ module.exports = function (app) {
     //console.log('User Input', input);
     var initNum = convertHandler.getNum(input);
     var initUnit = convertHandler.getUnit(input);
-    // console.log('the route values \ngetNum: ' + initNum, '\n getUnit: '+ initUnit);
+    //console.log('the route values \ngetNum: ' + initNum, '\n getUnit: '+ initUnit);
     var returnNum = convertHandler.convert(initNum, initUnit);
     var returnUnit = convertHandler.getReturnUnit(initUnit);
     var toString = convertHandler.getString(
@@ -28,15 +27,10 @@ module.exports = function (app) {
       returnNum,
       returnUnit
     );
-    var string = toString.toString();
-    console.log(string, "i am not object");
-
-    let result;
-    console.log(initUnit,"init unit")
 
     if (initUnit === null && initNum === null) {
       result = {
-        error: "invalid unit and number",
+        error: "invalid number and unit",
       };
     } else if (initUnit === null) {
       result = {

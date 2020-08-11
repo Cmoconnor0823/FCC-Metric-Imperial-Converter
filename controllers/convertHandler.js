@@ -64,13 +64,13 @@ function ConvertHandler() {
     // now we create an array of the acceptable output units determined by FCC
     let outputUnits = [
       "gal",
-      "l",
+      "L",
       "mi",
       "km",
       "lbs",
       "kg",
       "gal",
-      "l",
+      "L",
       "mi",
       "km",
       "lbs",

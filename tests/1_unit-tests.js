@@ -118,6 +118,37 @@ suite("Unit Tests", function () {
   suite("Function convertHandler.spellOutUnit(unit)", function () {
     test("For Each Valid Unit Inputs", function (done) {
       //see above example for hint
+      let input = [
+        "gal",
+        "l",
+        "mi",
+        "km",
+        "lbs",
+        "kg",
+        "GAL",
+        "L",
+        "MI",
+        "KM",
+        "LBS",
+        "KG",
+      ];
+      let expected = [
+        "gallons",
+        "liters",
+        "miles",
+        "kilometers",
+        "pounds",
+        "kilograms",
+        "gallons",
+        "liters",
+        "miles",
+        "kilometers",
+        "pounds",
+        "kilograms",
+      ];
+      input.forEach((ele,i) => {
+        assert.equal(convertHandler.spellOutUnit(ele), expected[i])
+      })
       done();
     });
   });
@@ -135,7 +166,14 @@ suite("Unit Tests", function () {
     });
 
     test("L to Gal", function (done) {
-      //done();
+      var input = [5, "L"];
+      var expected = 1.32086;
+      assert.approximately(
+        convertHandler.convert(input[0], input[1]),
+        expected,
+        0.1
+      );
+      done();
     });
 
     test("Mi to Km", function (done) {

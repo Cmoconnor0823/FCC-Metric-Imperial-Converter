@@ -72,13 +72,13 @@ suite("Unit Tests", function () {
       ];
       var expected = [
         "gal",
-        "l",
+        "L",
         "mi",
         "km",
         "lbs",
         "kg",
         "gal",
-        "l",
+        "L",
         "mi",
         "km",
         "lbs",
@@ -116,7 +116,7 @@ suite("Unit Tests", function () {
   });  
 
   suite("Function convertHandler.spellOutUnit(unit)", function () {
-    test("For Each Valid Unit Inputs", function (done) {
+    test("For Each Valid Unit Inputs (spelled out)", function (done) {
       //see above example for hint
       let input = [
         "gal",
@@ -177,19 +177,49 @@ suite("Unit Tests", function () {
     });
 
     test("Mi to Km", function (done) {
-      //done();
+      var input = [5, "mi"];
+      var expected = 8.0467;
+      assert.approximately(
+        convertHandler.convert(input[0], input[1]),
+        expected,
+        0.1
+      );
+      
+      done();
     });
 
     test("Km to Mi", function (done) {
-      //done();
+      var input = [5, "km"];
+      var expected = 3.10686;
+      assert.approximately(
+        convertHandler.convert(input[0], input[1]),
+        expected,
+        0.1
+      );
+      done();
     });
 
     test("Lbs to Kg", function (done) {
-      //done();
+      var input = [5, "lbs"];
+      var expected = 2.26796;
+      assert.approximately(
+        convertHandler.convert(input[0], input[1]),
+        expected,
+        0.1
+      );
+      
+      done();
     });
 
     test("Kg to Lbs", function (done) {
-      //done();
+      var input = [5, "kg"];
+      var expected = 11.02312;
+      assert.approximately(
+        convertHandler.convert(input[0], input[1]),
+        expected,
+        0.1
+      );
+      done();
     });
   });
 });

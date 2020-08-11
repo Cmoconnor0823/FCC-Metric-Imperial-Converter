@@ -90,32 +90,10 @@ function ConvertHandler() {
   this.getReturnUnit = (initUnit) => {
     // this function us used to find the counterpoint for the input unit ex km is equavalent to mi
     let input = [
-      "gal",
-      "l",
-      "mi",
-      "km",
-      "lbs",
-      "kg",
-      "GAL",
-      "L",
-      "MI",
-      "KM",
-      "LBS",
-      "KG",
+      'gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'
     ];
     let output = [
-      "L",
-      "gal",
-      "km",
-      "mi",
-      "kg",
-      "lbs",
-      "L",
-      "gal",
-      "km",
-      "mi",
-      "kg",
-      "lbs",
+      'L','gal','km','mi','kg','lbs', "L", "gal", "km", "mi", "kg", "lbs"
     ];
 
     // Now we will find the index of the initUnit in our input array,
@@ -187,7 +165,7 @@ function ConvertHandler() {
     console.log(convert);
     // now create and if else statement to handle errors or invalid data
     if (initNum == "invalid number" && initUnit == "invalid unit") {
-      return "invalid number and unit";
+      return "invalid unit and number";
     } else if (initNum == "invalid number") {
       return "invalid number";
     } else if (initUnit == "invalid unit") {

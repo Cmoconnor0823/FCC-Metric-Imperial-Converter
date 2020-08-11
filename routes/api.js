@@ -15,7 +15,7 @@ module.exports = function (app) {
 
   app.route("/api/convert").get((req, res) => {
     var input = req.query.input;
-    //console.log('User Input', input);
+    console.log("User Input", input);
     var initNum = convertHandler.getNum(input);
     var initUnit = convertHandler.getUnit(input);
     //console.log('the route values \ngetNum: ' + initNum, '\n getUnit: '+ initUnit);
@@ -28,29 +28,20 @@ module.exports = function (app) {
       returnUnit
     );
 
-    if (initUnit === null && initNum === null) {
-      result = {
-        error: "invalid number and unit",
-      };
-    } else if (initUnit === null) {
-      result = {
-        error: "invalid unit",
-      };
-    } else if (initNum === null) {
-      result = {
-        error: "invalid number",
-      };
+    if (initUnit === "invalid unit" && initNum === "invalid number") {
+      return res.json("invalid unit and number");
+    } else if (initUnit === "invalid unit") {
+      return res.json("invalid unit");
+    } else if (initNum === "invalid number") {
+      return res.json("invalid number");
     } else {
-      result = {
+      return res.json({
         initNum,
         initUnit,
         returnNum,
         returnUnit,
         string: toString,
-      };
-      // add.to string to allow json to print return
+      });
     }
-    //res.json
-    res.json(result);
   });
 };

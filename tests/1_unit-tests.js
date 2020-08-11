@@ -30,8 +30,8 @@ suite('Unit Tests', function(){
     });
     
     test('Fractional Input', function(done) {
-      var input = '6/3L';
-      assert.equal(convertHandler.getNum(input),2);
+      var input = '4/2/10';
+      assert.equal(convertHandler.getNum(input), "invalid number");
       done();
     });
     
@@ -44,7 +44,7 @@ suite('Unit Tests', function(){
     test('Invalid Input (double fraction)', function(done) {
       var input = '6/3/3';
      // console.log(assert.equal(convertHandler.getNum(input),null))
-      assert.equal(convertHandler.getNum(input), null);
+      assert.equal(convertHandler.getNum(input), "invalid number");
       done();
     });
     

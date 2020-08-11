@@ -5,6 +5,8 @@
  *
  *
  */
+// importing math js will allow our function below to handle fractions and math problems within the input
+const math = require("mathjs");
 
 function ConvertHandler() {
   this.getNum = (input) => {
@@ -21,8 +23,8 @@ function ConvertHandler() {
       // to be converted
     } else {
       inputNumbers = input.substring(0, unitStartIndexs);
-     console.log( inputNumbers, "should be a string of numbers")
-    }
+     // console.log(typeof inputNumbers, inputNumbers, "should be a string of numbers");
+    };
     // then a if check for a user story that states if a unit is present but no numbers
     // assume a number input of one (1)
     if (inputNumbers.length == 0) {
@@ -30,8 +32,11 @@ function ConvertHandler() {
     }
     // now a check to cover the user story where we will have a invaild double fraction as an input
     // remember at this point our inpitNumbers are a string
-    if (inputNumbers.split(/\//).length > 2) return "invalid number";
-    return inputNumbers
+    if (inputNumbers.split(/\//).length > 2) {
+      return "invalid number";
+    }
+
+    return math.evaluate(inputNumbers);
   };
 
   this.getUnit = (input) => {
@@ -168,36 +173,34 @@ function ConvertHandler() {
     // for easier access lets store our conversion rates in an object
     const convertRates = {
       gal: 3.78541,
-      L: 1/3.78541,
+      L: 1 / 3.78541,
       lbs: 0.453592,
-      kg: 1/0.453592,
+      kg: 1 / 0.453592,
       mi: 1.60934,
-      km: 1/1.60934
+      km: 1 / 1.60934,
+    };
+
+    // according to the user stories the solution should be no more than 5 decimal places
+    // look into parse float with .tofixed or math .round
+    console.log(initNum, "init");
+    let convert = parseFloat((initNum * convertRates[initUnit]).toFixed(5));
+    console.log(convert);
+    // now create and if else statement to handle errors or invalid data
+    if (initNum == "invalid number" && initUnit == "invalid unit") {
+      return "invalid number and unit";
+    } else if (initNum == "invalid number") {
+      return "invalid number";
+    } else if (initUnit == "invalid unit") {
+      return "invalid unit";
+    } else {
+      return convert;
     }
-
-      // according to the user stories the solution should be no more than 5 decimal places
-      // look into parse float with .tofixed or math .round
-      console.log(initNum, "init")
-      let convert = parseFloat((initNum * convertRates[initUnit]).toFixed(5) );
-      console.log(convert)
-      // now create and if else statement to handle errors or invalid data
-      if (initNum == "invalid number" && initUnit == "invalid unit") {
-        return "invalid number and unit";
-      }
-      else if (initNum == "invalid number") {
-        return "invalid number";
-      }
-      else if (initUnit == "invalid unit") {
-        return "invalid unit";
-      } else {
-        return convert;
-      }
-
   };
-    
+
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    
-    return `${initNum} ${this.spellOutUnit(initUnit)} will convert to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
+    return `${initNum} ${this.spellOutUnit(
+      initUnit
+    )} will convert to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
   };
 }
 

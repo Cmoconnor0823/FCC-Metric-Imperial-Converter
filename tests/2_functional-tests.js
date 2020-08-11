@@ -75,7 +75,7 @@ suite('Functional Tests', function() {
           assert.equal(res.body.initNum, 1);
           assert.equal(res.body.initUnit, "kg");
           assert.approximately(res.body.returnNum, 2.20462, 0.0001);
-          assert.equal(res.body, "invalid unit and number");
+          assert.equal(res.body.returnUnit, 'lbs');
           done();
         });
       });
